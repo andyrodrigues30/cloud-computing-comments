@@ -21,6 +21,16 @@ export default function CommentForm({ comments, setComments }) {
     setComments(newCommentsList);
   }
 
+    const submitResponse = () => {
+      console.log(UserInput)
+      axios.post("http://localhost:5000/UserResponse/add",{"UserResponse": newComment,"UserName": name})
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Error: " + err))
+
+      setUserInput("")
+      // document.location.reload() 
+  }      
+
   return (
     <div className="my-5 bg-[#FAFAFA] p-4 rounded">
       <div className="mb-2">

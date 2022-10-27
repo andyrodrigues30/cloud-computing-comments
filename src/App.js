@@ -7,6 +7,7 @@ import "./App.css";
 export default function App() {
 
   const [comments, setComments] = useState([]);
+  const [UsersResponse, setUsersResponse] = useState([]);
 
   useEffect(() => {
     // TODO: fetch comments from database
@@ -17,6 +18,18 @@ export default function App() {
       { "message": "Another test comment.", "creator": "Kevin" }
     ])
   }, [])
+
+  const fetchData = () => {
+    fetch("http://localhost:5000/UserResponse/")
+      .then((response) => response.json())
+      .then((data) => {
+        setUsersResponse(data);
+        console.log(UsersResponse);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="flex justify-center">
