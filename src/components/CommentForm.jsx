@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios"
 export default function CommentForm({ comments, setComments }) {
 
   const [name, setName] = useState("");
@@ -22,12 +22,10 @@ export default function CommentForm({ comments, setComments }) {
   }
 
     const submitResponse = () => {
-      console.log(UserInput)
       axios.post("http://localhost:5000/UserResponse/add",{"UserResponse": newComment,"UserName": name})
       .then(res => console.log(res.data))
       .catch(err => console.log("Error: " + err))
 
-      setUserInput("")
       // document.location.reload() 
   }      
 

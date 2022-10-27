@@ -20,27 +20,29 @@ router.route("/add").post((req,res) => {
 })
 // route to add a response to the database
 
-router.route('/:id').get((req,res) =>{
-    Responses.findById(req.params.id)
-    .then(IndividualRes => res.json(IndividualRes))
-    .catch(err => res.status(400).json("Error: "+ err))
-})  
-//route to get individual result
+// Totally didn't Copy these routes from my old project ;)
 
-router.route("/:id").delete((req, res) => {
-    Responses.findByIdAndDelete(req.params.id)
-    .then(() => res.json("Deleted"))
-})
-//Route to delete individual responce
-router.route("/update/:id").post((req,res) =>{
-    Responses.findById(req.params.id)
-    .then(responses => {
-        responses.UserResponse = req.body.UserResponse;
-        responses.save()
-            .then(()=> res.json("Response Updated"))
-            .catch(err => res.status(400).json("Error: " + err))         
-    })
-    .catch(err => res.status(400).json("Error: " + err))         
-})
-// Route to update a individual response 
+// router.route('/:id').get((req,res) =>{
+//     Responses.findById(req.params.id)
+//     .then(IndividualRes => res.json(IndividualRes))
+//     .catch(err => res.status(400).json("Error: "+ err))
+// })  
+// //route to get individual result
+
+// router.route("/:id").delete((req, res) => {
+//     Responses.findByIdAndDelete(req.params.id)
+//     .then(() => res.json("Deleted"))
+// })
+// //Route to delete individual responce
+// router.route("/update/:id").post((req,res) =>{
+//     Responses.findById(req.params.id)
+//     .then(responses => {
+//         responses.UserResponse = req.body.UserResponse;
+//         responses.save()
+//             .then(()=> res.json("Response Updated"))
+//             .catch(err => res.status(400).json("Error: " + err))         
+//     })
+//     .catch(err => res.status(400).json("Error: " + err))         
+// })
+// // Route to update a individual response 
 module.exports = router
