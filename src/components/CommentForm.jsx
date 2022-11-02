@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios"
 export default function CommentForm({ comments, setComments }) {
 
   const [name, setName] = useState("");
@@ -11,8 +10,10 @@ export default function CommentForm({ comments, setComments }) {
 
 
   const handleSubmit = () => {
-    // TODO: write to database
     const newCommentData = { "message": newComment, "creator": name };
+    
+    // write to database
+    submitResponse(newCommentData);
 
     let newCommentsList = []
     newCommentsList.push(...comments, newCommentData);
@@ -21,13 +22,15 @@ export default function CommentForm({ comments, setComments }) {
     setComments(newCommentsList);
   }
 
-    const submitResponse = () => {
-      axios.post("http://localhost:5000/UserResponse/add",{"UserResponse": newComment,"UserName": name})
-      .then(res => console.log(res.data))
-      .catch(err => console.log("Error: " + err))
-
-      // document.location.reload() 
-  }      
+  const submitResponse = async (newCommentData) => {
+    await fetch("http://localhost:5000/UserResponse/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newCommentData)
+    });
+  }
 
   return (
     <div className="my-5 bg-[#FAFAFA] p-4 rounded">
@@ -45,7 +48,7 @@ export default function CommentForm({ comments, setComments }) {
         <textarea
           value={newComment}
           onChange={(event) => handleNewCommentChange(event)}
-          className="w-full bg-[#ececec] p-2 rounded"
+          className="w-full bg-[#ececec] p-2 rounded resize-none	"
         />
       </div>
 
