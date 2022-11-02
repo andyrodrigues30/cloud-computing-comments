@@ -9,6 +9,7 @@ const port = process.env.Port || 8000
 //specify the port that i will be using for the server
 
 app.use(cors())
+app.use(express.static("./client/build"));
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
@@ -23,6 +24,10 @@ connection.once("open", () => {
 const UserResponceRouter = require("./routes/UserResponse.js");
 app.use("/UserResponse", UserResponceRouter)
 //tells the server to use the router 
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(port, () => {
     console.log(port);
