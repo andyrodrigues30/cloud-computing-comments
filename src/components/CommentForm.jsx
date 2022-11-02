@@ -10,7 +10,7 @@ export default function CommentForm({ comments, setComments }) {
 
 
   const handleSubmit = () => {
-    const newCommentData = { "message": newComment, "creator": name };
+    const newCommentData = {"UserResponse": newComment,"UserName": name}
     
     // write to database
     submitResponse(newCommentData);
@@ -23,7 +23,7 @@ export default function CommentForm({ comments, setComments }) {
   }
 
   const submitResponse = async (newCommentData) => {
-    await fetch("http://localhost:5000/UserResponse/add", {
+    await fetch("http://localhost:8000/UserResponse/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -7,24 +7,17 @@ import "./App.css";
 export default function App() {
 
   const [comments, setComments] = useState([]);
-  const [UsersResponse, setUsersResponse] = useState([]);
 
   useEffect(() => {
-    // TODO: fetch comments from database
-    setComments([
-      { "message": "First ever comment.", "creator": "John Doe" },
-      { "message": "Another awesome comment.", "creator": "Jane Smith" },
-      { "message": "Another comment about cloud computing.", "creator": "Jeff" },
-      { "message": "Another test comment.", "creator": "Kevin" }
-    ])
+    fetchData();
   }, [])
 
   const fetchData = () => {
-    fetch("http://localhost:5000/UserResponse/")
+    fetch("http://localhost:8000/UserResponse/")
       .then((response) => response.json())
       .then((data) => {
-        setUsersResponse(data);
-        console.log(UsersResponse);
+        setComments(data);
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
