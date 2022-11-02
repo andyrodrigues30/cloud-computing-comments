@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios"
 export default function CommentForm({ comments, setComments }) {
 
   const [name, setName] = useState("");
@@ -20,6 +20,14 @@ export default function CommentForm({ comments, setComments }) {
     // update comments array
     setComments(newCommentsList);
   }
+
+    const submitResponse = () => {
+      axios.post("http://localhost:5000/UserResponse/add",{"UserResponse": newComment,"UserName": name})
+      .then(res => console.log(res.data))
+      .catch(err => console.log("Error: " + err))
+
+      // document.location.reload() 
+  }      
 
   return (
     <div className="my-5 bg-[#FAFAFA] p-4 rounded">
