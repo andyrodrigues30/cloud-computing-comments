@@ -13,7 +13,7 @@ export default function App() {
   }, [])
 
   const fetchData = () => {
-    fetch("http://localhost:8000/UserResponse/")
+    fetch("/UserResponse")
       .then((response) => response.json())
       .then((data) => {
         setComments(data);
